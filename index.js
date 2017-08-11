@@ -18,7 +18,7 @@ function requestToK8s(name, namespace) {
     request({
             // will be ignored
             method: 'PATCH',
-            uri: `http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/{$namespace}/deployments/{$name}`
+            uri: `http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/{$namespace}/deployments/{$name}`,
              headers: [
                 {
                   name: 'content-type',
