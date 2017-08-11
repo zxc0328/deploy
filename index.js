@@ -21,7 +21,7 @@ function requestToK8s(name, namespace) {
             uri: `http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/${namespace}/deployments/${name}`,
              headers: [
                 {
-                  name: 'content-type',
+                  name: 'Content-Type',
                   value: 'application/strategic-merge-patch+json'
                 }
               ],
