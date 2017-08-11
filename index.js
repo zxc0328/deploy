@@ -17,7 +17,7 @@ function requestToK8s(payLoad) {
   return new Promise( (resolve, reject) => {
     request({
             // will be ignored
-            method: 'PATXH',
+            method: 'PATCH',
             uri: 'http://127.0.0.1:8080',
              headers: [
                 {
