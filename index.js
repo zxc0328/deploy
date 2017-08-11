@@ -26,9 +26,9 @@ function requestToK8s(payLoad) {
                 }
               ],
               body: JSON.stringify(payLoad)
-          }, function (argument) {
+          }, function (error, response, body) {
               // body...
-              console.log(argument)
+              console.log(error, response, body)
               resolve(argument)
           })
 
