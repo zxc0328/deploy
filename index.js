@@ -13,12 +13,12 @@ const templateRoot = path.join(__dirname, "./")
 const namespacesWhiteList = ["muxiauth", "muxisite"]
 const nameWhiteList = ["muxiauthfe"]
 
-function requestToK8s(payLoad) {
+function requestToK8s(name, namespace) {
   return new Promise( (resolve, reject) => {
     request({
             // will be ignored
             method: 'PATCH',
-            uri: 'http://127.0.0.1:8080',
+            uri: `http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/{$namespace}/deployments/{$name}`
              headers: [
                 {
                   name: 'content-type',
@@ -64,7 +64,7 @@ router.post('/', async function(ctx, next){
                 }
             }
           }}
-          await requestToK8s(payLoad);
+          await requestToK8s(name, namespace, image);
           message = "部署成功！请耐心等待几分钟后查看部署是否成功。有问题请咨询"
            
      }else {
