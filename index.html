@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>Muxi Cluster Deployment</title>
+	<style type="text/css">
+		label, input{
+			display: block;
+			width:50%;
+		}
+	</style>
+</head>
+<body>
+	<h3>木犀华南集群临时部署工具</h3>
+	<form action="/" method="POST">
+	    <div>
+	    	<label>服务名（如不清楚清咨询）</label>
+		    <input type="text" name="name">
+	    </div>
+		<div>
+			<label>命名空间（如不清楚清咨询）</label>
+		    <input type="text" name="namespace">
+		</div>
+		<div>
+			<label>镜像版本（填写完整镜像仓库地址和版本号 如registry-internal.cn-shenzhen.aliyuncs.com/muxiauth/muxiauth_fe:latest 阿里云镜像仓库请填写经典内网地址）</label>
+		    <input type="text" name="image">
+		</div>
+		<div>
+			<button type="submit">提交</button>
+		</div>
+	</form>
+</body>
+</html>

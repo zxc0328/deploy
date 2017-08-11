@@ -1,0 +1,26 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "description": "临时部署工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zxc0328/deploy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zxc0328/deploy/issues"
+  },
+  "homepage": "https://github.com/zxc0328/deploy#readme",
+  "dependencies": {
+    "async-busboy": "^0.6.1",
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "request": "^2.81.0",
+    "swig": "^1.4.2"
+  }
+}
