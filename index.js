@@ -7,6 +7,7 @@ const router = new Router();
 const app = new Koa();
 const asyncBusboy = require('async-busboy');
 const request = require('request')
+const  shell = require('shelljs');
 
 const templateRoot = path.join(__dirname, "./")
 
@@ -51,21 +52,27 @@ router.post('/', async function(ctx, next){
 
      if (nameWhiteList.indexOf(name) > -1 && namespacesWhiteList.indexOf(namespace) > -1) {
 
-          let payLoad = {
-            spec: {
-                template: {
-                    spec: {
-                        containers: [
-                            {
-                                name: name, 
-                                image: image, 
-                                env: [{name: "PLEASE_REPULLIMAGE", value: Math.random()}]
-                            }
-                        ]
-                }
-            }
-          }}
-          await requestToK8s(name, namespace, image);
+          // let payLoad = {
+          //   spec: {
+          //       template: {
+          //           spec: {
+          //               containers: [
+          //                   {
+          //                       name: name, 
+          //                       image: image, 
+          //                       env: [{name: "PLEASE_REPULLIMAGE", value: Math.random()}]
+          //                   }
+          //               ]
+          //       }
+          //   }
+          // }}
+          // await requestToK8s(name, namespace, image);
+          let command = `curl -X PATCH -H 'Content-Type: application/strategic-merge-patch+json' --data '
+{"spec":{"template":{"spec":{"containers":[{"name":"muxiauthfe","image":"registry-internal.cn-shenzhen.aliyuncs.com/muxiauth/muxiauth_fe:1.0-beta7"}]}}}}' \
+    'http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/muxiauth/deployments/muxiauthfe'`
+          if (shell.exec(command).code !== 0) {
+            console.log('Error: Git commit failed');
+          }
           message = "部署成功！请耐心等待几分钟后查看部署是否成功。有问题请咨询"
            
      }else {
