@@ -25,7 +25,8 @@ function requestToK8s(name, namespace) {
                   value: 'application/strategic-merge-patch+json'
                 }
               ],
-              body: `{"spec":{"template":{"spec":{"containers":[{"name":"muxiauthfe","image":"registry-internal.cn-shenzhen.aliyuncs.com/muxiauth/muxiauth_fe:1.0-beta7"}]}}}}`
+              body: `{"spec":{"template":{"spec":{"containers":[{"name":"muxiauthfe","image":"registry-internal.cn-shenzhen.aliyuncs.com/muxiauth/muxiauth_fe:1.0-beta7"}]}}}}`,
+              json: true
           }, function (error, response, body) {
               // body...
               console.log(error, response, body)
