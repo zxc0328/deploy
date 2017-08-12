@@ -14,28 +14,6 @@ const templateRoot = path.join(__dirname, "./")
 const namespacesWhiteList = ["muxiauth", "muxisite"]
 const nameWhiteList = ["muxiauthfe"]
 
-function requestToK8s(name, namespace) {
-  return new Promise( (resolve, reject) => {
-    request({
-            // will be ignored
-            method: 'PATCH',
-            uri: `http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/${namespace}/deployments/${name}`,
-             headers: [
-                {
-                  name: 'Content-Type',
-                  value: 'application/strategic-merge-patch+json'
-                }
-              ],
-              body: `{"spec":{"template":{"spec":{"containers":[{"name":"muxiauthfe","image":"registry-internal.cn-shenzhen.aliyuncs.com/muxiauth/muxiauth_fe:1.0-beta7"}]}}}}`,
-              json: true
-          }, function (error, response, body) {
-              // body...
-              console.log(error, response, body)
-              resolve(response)
-          })
-
-  })
-}
 
 router.get('/', function(ctx, next){
  let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
@@ -68,8 +46,8 @@ router.post('/', async function(ctx, next){
           // }}
           // await requestToK8s(name, namespace, image);
           let command = `curl -X PATCH -H 'Content-Type: application/strategic-merge-patch+json' --data '
-{"spec":{"template":{"spec":{"containers":[{"name":"muxiauthfe","image":"registry-internal.cn-shenzhen.aliyuncs.com/muxiauth/muxiauth_fe:1.0-beta7"}]}}}}' \
-    'http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/muxiauth/deployments/muxiauthfe'`
+{"spec":{"template":{"spec":{"containers":[{"name":"${name}","image":"${image}", "env": [{"name":"PLEASE_REPULLIMAGE", "value": "${Math.random()}"}]}]}}}}' \
+    'http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/${namespace}/deployments/${name}'`
           if (shell.exec(command).code !== 0) {
             console.log('Error: Git commit failed');
           }
