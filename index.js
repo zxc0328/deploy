@@ -11,8 +11,8 @@ const  shell = require('shelljs');
 
 const templateRoot = path.join(__dirname, "./")
 
-const namespacesWhiteList = ["muxiauth", "muxisite"]
-const nameWhiteList = ["muxiauthfe"]
+const namespacesWhiteList = ["muxiauth", "muxisite", "guisheng", "asynccnu"]
+const nameWhiteList = ["muxiauthfe", "muxisite-main-api", "guisheng_fe", "guisheng_be", "guisheng_management"]
 
 
 router.get('/', function(ctx, next){
@@ -26,6 +26,7 @@ router.post('/', async function(ctx, next){
      const name = parsed.fields.name;
      const namespace = parsed.fields.namespace;
      const image = parsed.fields.image;
+     const containerName = parsed.fields.containerName || name;
      let message = "";
 
      if (nameWhiteList.indexOf(name) > -1 && namespacesWhiteList.indexOf(namespace) > -1) {
@@ -46,7 +47,7 @@ router.post('/', async function(ctx, next){
           // }}
           // await requestToK8s(name, namespace, image);
           let command = `curl -X PATCH -H 'Content-Type: application/strategic-merge-patch+json' --data '
-{"spec":{"template":{"spec":{"containers":[{"name":"${name}","image":"${image}", "env": [{"name":"PLEASE_REPULLIMAGE", "value": "${Math.random()}"}]}]}}}}' \
+{"spec":{"template":{"spec":{"containers":[{"name":"${containerName}","image":"${image}", "env": [{"name":"PLEASE_REPULLIMAGE", "value": "${Math.random()}"}]}]}}}}' \
     'http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/${namespace}/deployments/${name}'`
           if (shell.exec(command).code !== 0) {
             console.log('Error: Git commit failed');
