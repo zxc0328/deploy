@@ -26,6 +26,6 @@ spec:
           - wsgi:app
         env:
           - name: AUTH_SQL
-            value: 'mysql://muxi:muxi304@rm-wz986q9gcfau74vi0.mysql.rds.aliyuncs.com/muxisite_auth'
+            value: ''
         ports:
         - containerPort: 5499
