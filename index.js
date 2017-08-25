@@ -12,7 +12,7 @@ const  shell = require('shelljs');
 const templateRoot = path.join(__dirname, "./")
 
 const namespacesWhiteList = ["muxiauth", "muxisite", "guisheng-fe", "guisheng-be", "guisheng-mana", "asynccnu"]
-const nameWhiteList = ["muxiauthfe", "muxisite-main-api", "muxisite_auth_api", "muxisite_auth_fe", "muxisite_share_fe", "muxisite_blog_fe", "guisheng-fe", "guisheng-be", "guisheng-mana"]
+const nameWhiteList = ["muxiauthfe", "muxisite-main-api", "muxisite-auth-api", "muxisite-auth-fe", "muxisite-share-fe", "muxisite-blog-fe", "guisheng-fe", "guisheng-be", "guisheng-mana"]
 
 
 router.get('/', function(ctx, next){

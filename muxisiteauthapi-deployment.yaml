@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: muxisite_auth_api
+  name: muxisite-auth-api
   namespace: muxisite
   labels:
-    run: muxisite_auth_api
+    run: muxisite-auth-api
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        run: muxisite_auth_api
+        run: muxisite-auth-api
     spec:
       containers:
       - name: apiserver
@@ -26,6 +26,6 @@ spec:
           - wsgi:app
         env:
           - name: AUTH_SQL
-            value: ''
+            value: 'mysql://muxi:muxi304@rm-wz986q9gcfau74vi0.mysql.rds.aliyuncs.com/muxisite_auth'
         ports:
         - containerPort: 5499
