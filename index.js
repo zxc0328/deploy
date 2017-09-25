@@ -50,7 +50,7 @@ router.post('/', async function(ctx, next){
           // await requestToK8s(name, namespace, image);
           let command = `curl -X PATCH -H 'Content-Type: application/strategic-merge-patch+json' --data '
 {"spec":{"template":{"spec":{"containers":[{"name":"${containerName}","image":"${image}", "env": [{"name":"${envKey}", "value": "${envValue}"},{"name":"PLEASE_REPULLIMAGE", "value": "${Math.random()}"}]}]}}}}' \
-    'http://127.0.0.1:8080/apis/apps/v1beta1/namespaces/${namespace}/deployments/${name}'`
+    'http://127.0.0.1:8001/apis/apps/v1beta1/namespaces/${namespace}/deployments/${name}'`
           if (shell.exec(command).code !== 0) {
             console.log('Error: Git commit failed');
           }
