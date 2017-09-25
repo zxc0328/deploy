@@ -27,8 +27,8 @@ router.post('/', async function(ctx, next){
      const namespace = parsed.fields.namespace;
      const image = parsed.fields.image;
      const containerName = parsed.fields.containerName || name;
-     const envKey = parsed.envKey || "Bar";
-     const envValue = parsed.envValue || "Barz";
+     const envKey = parsed.fields.envKey || "Bar";
+     const envValue = parsed.fields.envValue || "Barz";
      let message = "";
 
      if (nameWhiteList.indexOf(name) > -1 && namespacesWhiteList.indexOf(namespace) > -1) {
