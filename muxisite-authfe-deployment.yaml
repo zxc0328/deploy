@@ -1,20 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: muxisite-blog-fe
+  name: muxisite-auth-fe
   namespace: muxisite
   labels:
-    run: muxisite-blog-fe
+    run: muxisite-auth-fe
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        run: muxisite-blog-fe
+        run: muxisite-auth-fe
     spec:
       containers:
-      - name: blogfe
-        image: registry-internal.cn-shenzhen.aliyuncs.com/muxi/muxi_blog_fe
+      - name: authfe
+        image: registry-internal.cn-shenzhen.aliyuncs.com/muxiauth/muxi_auth_fe
         ports:
         - containerPort: 3000
 
