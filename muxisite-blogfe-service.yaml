@@ -3,12 +3,12 @@ kind: Service
 metadata:
   namespace: muxisite
   labels:
-    run: muxisite-auth-api
-  name: muxisite-auth-api
+    run: muxisite-blog-fe
+  name: muxisite-blog-fe
 spec:
   ports:
-  - port: 5499
-    targetPort: 5499
+  - port: 3000
+    targetPort: 3000
     protocol: TCP
   selector:
-    run: muxisite-auth-api
+    run: muxisite-blog-fe
