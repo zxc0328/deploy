@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: xueer-fe
+  namespace: xueer
+  labels:
+    run: xueer-fe
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: xueer-fe
+    spec:
+      containers:
+      - name: xueerfe
+        image: registry-internal.cn-shenzhen.aliyuncs.com/muxi/xueer_fe
+        ports:
+        - containerPort: 3000
+
